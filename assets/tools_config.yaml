@@ -1,0 +1,30 @@
+# Idea Forge v1.1 tool expectation config
+# 注意：本文件只表示“期望工具配置”，不代表当前智能体实际具备这些工具。
+# 执行查新前必须以当前运行环境的真实工具能力为准，并输出工具能力声明。
+
+search_tools:
+  web_search: expected          # expected / unavailable / unknown
+  arxiv_api: optional           # optional but recommended for AI preprint novelty checks
+  semantic_scholar_api: optional
+  paperswithcode: optional
+  local_library: null           # 本地文献库路径；没有则为 null
+
+coverage_rules:
+  no_search_tool: "L3 AC conclusion ceiling = Proceed with Verification Required; veto item #1 cannot be finalized."
+  no_arxiv_api: "Mark preprint coverage as medium/limited."
+  no_paperswithcode: "Mark SOTA/leaderboard verification as requiring manual check."
+  config_mismatch: "Actual runtime tools override this config."
+
+user_conditions:
+  datasets: []
+  compute: null                 # e.g., "4x A100 40G"
+  time_budget: null             # e.g., "6 months"
+  skills: []
+  funding: null
+  target_venue: null
+  risk_tolerance: null          # conservative / balanced / high-risk
+
+archive:
+  mode: session_first           # session_first / file_if_available
+  file_path: archive/rejected-ideas.md
+  note: "If the runtime cannot write files, archive is only valid within the current conversation."
